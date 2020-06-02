@@ -1,5 +1,7 @@
 # Setup Virtual Environment
-## First step: Clone this source
+## First step:  
+Clone this shit to your computer
+## ... Then execute commands below
 $ cd django-svdms  
 $ virtualenv env  
 $ source env/bin/activate  
@@ -18,6 +20,6 @@ Django
 - 'django.contrib.gis',  
 
 DRF  
-Postgres  
-Postgis  
+PostgreSQL  
+PostGIS  
 Redis  
