@@ -14,6 +14,9 @@ $ python manage.py createsuperuser --email trungpt.dev@gmail.com --username trun
 
 # Tech-stack
 Django  
+- 'rest_framework',  
+- 'django.contrib.gis',  
+
 DRF  
 Postgres  
 Postgis  
