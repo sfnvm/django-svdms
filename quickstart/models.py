@@ -21,6 +21,8 @@ class User(AbstractUser):
 
 
 class SalesManager(models.Model):
+    class Meta:
+        db_table = 'sales_manager'
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=128, unique=True, blank=True)
     idcard = models.CharField(max_length=128, unique=True, blank=True)
@@ -28,7 +30,7 @@ class SalesManager(models.Model):
     email = models.EmailField(max_length=128, unique=True, blank=True)
     address = models.CharField(max_length=255, blank=True)
     date_of_birth = models.DateField(default=timezone.datetime(1996, 12, 28))
-    date_created = models.DateField(default=timezone.now)
+    created_date = models.DateField(default=timezone.now)
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
@@ -43,7 +45,8 @@ class SalesMan(models.Model):
     email = models.EmailField(max_length=128, unique=True, blank=True)
     address = models.CharField(max_length=255, blank=True)
     date_of_birth = models.DateField(default=timezone.datetime(1996, 12, 28))
-    date_created = models.DateField(default=timezone.now)
+    created_date = models.DateField(default=timezone.now)
+    updated_date = models.DateField(blank=True, null=True)
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
@@ -64,28 +67,31 @@ class Agency(models.Model):
 
 class Product(models.Model):
     added_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True,
     )
+    name = models.CharField(max_length=255, blank=True)
+    image = models.CharField(max_length=255, blank=True)
+    weight = models.IntegerField(default=0)
+    length = models.IntegerField(default=0)
+    height = models.IntegerField(default=0)
+    origin = models.CharField(max_length=255, blank=True)
     created_date = models.DateTimeField(default=timezone.now)
 
 
-# class Author(models.Model):
-#     name = models.CharField(max_length=200)
-#     added_by = models.ForeignKey(
-#         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
-#     created_date = models.DateTimeField(default=timezone.now)
+class RequestOrder(models.Model):
+    class Meta:
+        db_table = 'request_order'
+    added_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True,
+    )
+    agency = models.ForeignKey(Agency, on_delete=models.CASCADE, blank=True)
+    approved = models.BooleanField(default=False)
+    created_date = models.DateTimeField(default=timezone.now)
 
-#     def __str__(self):
-#         return self.name
 
-
-# class Book(models.Model):
-#     title = models.CharField(max_length=200)
-#     description = models.CharField(max_length=300)
-#     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-#     added_by = models.ForeignKey(
-#         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
-#     created_date = models.DateTimeField(default=timezone.now)
-
-#     def __str__(self):
-#         return self.title
+class RequestOrderDetails(models.Model):
+    class Meta:
+        db_table = 'request_order_details'
+    request_order = models.ForeignKey(RequestOrder, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    amount = models.IntegerField(default=0)
