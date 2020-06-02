@@ -1,8 +1,9 @@
 # Setup Virtual Environment
-## First step: Clone source
+## First step: Clone this source
 $ cd django-svdms  
 $ virtualenv env  
 $ source env/bin/activate  
+$ pip install -r requirement.txt
 
 # Create default Superuser
 $ python manage.py createsuperuser --email trungpt.dev@gmail.com --username trungpt  
@@ -12,4 +13,4 @@ $ python manage.py createsuperuser --email trungpt.dev@gmail.com --username trun
 Django  
 DRF  
 Postgres
-Postgis // for geometric and location tracking usage  
+Postgis

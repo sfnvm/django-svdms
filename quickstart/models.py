@@ -17,7 +17,7 @@ class User(AbstractUser):
         (AGENCY, 'Agency')
     )
     role = models.PositiveSmallIntegerField(
-        choices=ROLE_CHOICES, blank=True, blank=True)
+        choices=ROLE_CHOICES, null=True, blank=True)
 
 
 class SalesManager(models.Model):
@@ -52,7 +52,7 @@ class SalesMan(models.Model):
 
 class Agency(models.Model):
     added_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=CASCADE, blank=True
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True
     )
     created_date = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=128, blank=True)
@@ -64,7 +64,7 @@ class Agency(models.Model):
 
 class Product(models.Model):
     added_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=CASCADE, blank=True
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True
     )
     created_date = models.DateTimeField(default=timezone.now)
 
