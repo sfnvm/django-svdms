@@ -6,6 +6,7 @@ from quickstart.models import SalesMan, Agency
 class AgencyLocation(models.Model):
     class Meta:
         db_table = 'agency_location'
+
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
@@ -28,6 +29,7 @@ class AgencyLocation(models.Model):
 class SalesmanLocationHis(models.Model):
     class Meta:
         db_table = 'salesman_location_history'
+
     salesman = models.ForeignKey(SalesMan, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True, null=True)
