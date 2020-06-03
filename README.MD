@@ -1,6 +1,10 @@
 # Setup Virtual Environment
 ## First step:  
-Clone this shit to your computer
+* Clone this shit to your computer  
+* I assume that you already installed:
+    - PostgreSQL v12
+    - PostgreSQL Extension: PostGIS
+
 ## ... Then execute commands below
 $ cd django-svdms  
 $ virtualenv env  
