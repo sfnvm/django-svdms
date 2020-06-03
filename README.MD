@@ -18,6 +18,7 @@ $ python manage.py createsuperuser --email trungpt.dev@gmail.com --username trun
 Django  
 - 'rest_framework',  
 - 'django.contrib.gis',  
+- 'channels'
 
 DRF  
 PostgreSQL  
