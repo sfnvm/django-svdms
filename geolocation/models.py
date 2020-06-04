@@ -5,7 +5,7 @@ from quickstart.models import SalesMan, Agency
 
 class AgencyLocation(models.Model):
     class Meta:
-        db_table = 'agency_location'
+        db_table = 'geolocation_agency_location'
 
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=128)
@@ -28,7 +28,7 @@ class AgencyLocation(models.Model):
 # Should change into websocket and use redis to cache data (2 many of records would be sent to db)
 class SalesmanLocationHis(models.Model):
     class Meta:
-        db_table = 'salesman_location_history'
+        db_table = 'geolocation_salesman_location_history'
 
     salesman = models.ForeignKey(SalesMan, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=128)

@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import SalesManager, SalesMan, User
+from .models import SalesManager, SalesMan
+from django.contrib.auth.models import User
 
 
 class SalesManagerSerializer(serializers.ModelSerializer):
@@ -13,18 +14,8 @@ class SalesManagerSerializer(serializers.ModelSerializer):
     class Meta:
         model = SalesManager
         fields = (
-            'id',
-            'username',
-            'password',
-            'email',
-            'first_name',
-            'last_name',
-            'code',
-            'idcard',
-            'phone_number',
-            'address',
-            'date_of_birth',
-            'gender',
+            'id', 'username', 'password', 'email', 'first_name', 'last_name',
+            'code', 'idcard', 'phone_number', 'address', 'date_of_birth', 'gender'
         )
 
     def create(self, validated_data):
@@ -36,7 +27,7 @@ class SalesManagerSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         user_data = validated_data.pop('user')
-        # update user
+        # update User
         for attr, value in user_data.items():
             setattr(instance, attr, value)
         # update SaleManager

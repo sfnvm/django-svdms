@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'quickstart',
     'django.contrib.gis',
-    'geolocation'
+    'geolocation',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -69,7 +70,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'svdms.wsgi.application'
+# WSGI_APPLICATION = 'svdms.wsgi.application'
+
+ASGI_APPLICATION = 'svdms.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -94,7 +97,7 @@ REDIS_OPTIONS = {
     }
 }
 
-AUTH_USER_MODEL = 'quickstart.User'
+# AUTH_USER_MODEL = 'quickstart.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -126,12 +129,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    )
+    ),
 }
 
 # JWT settings
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,

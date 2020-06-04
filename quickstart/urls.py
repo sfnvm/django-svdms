@@ -9,7 +9,9 @@ from rest_framework_simplejwt.views import (
 
 salesManagerViewset = SalesManagerViewSet.as_view({
     'get': 'list',
-    'post': 'create'
+    'post': 'create',
+    'put': 'update',
+    'delete': 'destroy',
 })
 
 
