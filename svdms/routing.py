@@ -1,12 +1,15 @@
 from django.conf.urls import url
-from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.auth import AuthMiddlewareStack
-from channels.security.websocket import AllowedHostsOriginValidator, OriginValidator
+from channels.routing import ProtocolTypeRouter, URLRouter
 
-from geolocation.consumers import GeoTrackConsumer, PingConsumer
+from .channelsmiddleware import TokenAuthMiddleware
+from geolocation.consumers import PingConsumer
+
 
 application = ProtocolTypeRouter({
-    'websocket': URLRouter([
-        url(r"ping/$", PingConsumer)
-    ])
+    'websocket': TokenAuthMiddleware(
+        URLRouter([
+            url(r"ping/$", PingConsumer)
+        ])
+    )
 })

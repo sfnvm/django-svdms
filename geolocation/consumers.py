@@ -1,29 +1,31 @@
 import asyncio
 import json
 from django.contrib.auth import get_user_model
-from channels.consumer import AsyncConsumer
-from channels.db import database_sync_to_async
-
-from .models import AgencyLocation, SalesmanLocationHis
+from channels.generic.websocket import WebsocketConsumer
 
 
-class GeoTrackConsumer(AsyncConsumer):
-    async def websocket_connect(self, event):
+class GeoTrackConsumer(WebsocketConsumer):
+    def connect(self, event):
         print('connected', event)
 
-    async def websocket_receive(self, event):
+    def receive(self, event):
         print('receive', event)
 
-    async def websocket_disconnect(self, event):
+    def disconnect(self, event):
         print('disconnectd', event)
 
 
-class PingConsumer(AsyncConsumer):
-    async def websocket_connect(self, message):
-        print('connected', message)
+class PingConsumer(WebsocketConsumer):
+    def connect(self):
+        self.accept()
 
-    async def websocket_receive(self, event):
-        print('receive', event)
+    def receive(self, text_data):
+        # text_data_json = json.loads(text_data)
+        # message = text_data_json['message']
 
-    async def websocket_disconnect(self, event):
-        print('disconnectd', event)
+        self.send(text_data=json.dumps({
+            'message': text_data
+        }))
+
+    def disconnect(self, close_code):
+        print('disconnected', close_code)
