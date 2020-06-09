@@ -36,10 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'quickstart',
+    'channels',
     'django.contrib.gis',
+    'quickstart',
     'geolocation',
-    'channels'
 ]
 
 MIDDLEWARE = [
@@ -97,7 +97,7 @@ REDIS_OPTIONS = {
     }
 }
 
-# AUTH_USER_MODEL = 'quickstart.User'
+AUTH_USER_MODEL = 'quickstart.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
