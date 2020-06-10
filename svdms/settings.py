@@ -25,7 +25,7 @@ SECRET_KEY = '$i4&j)o53(u_s0b)$m*dz*zeoalvw4x2ravz0#^f+e87i7$w(3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -81,8 +81,8 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.postgresql',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'django_quickstart',
-        'USER': 'trungpt',
-        'PASSWORD': '0812',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': '5432',
     }

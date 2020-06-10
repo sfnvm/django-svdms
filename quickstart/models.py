@@ -44,6 +44,9 @@ class SalesManager(models.Model):
 
 
 class SalesMan(models.Model):
+    class Meta:
+        db_table = 'quickstart_salesman'
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=32, unique=True, blank=True)
     idcard = models.CharField(max_length=128, unique=True, blank=True)
@@ -105,9 +108,9 @@ class RequestOrder(models.Model):
     code = models.CharField(max_length=32, unique=True, blank=True)
     bill_value = models.DecimalField(
         max_digits=11, decimal_places=2, default=0)
+    created_at = models.DateTimeField(default=timezone.now)
     approved = models.BooleanField(default=False)
     rejected = models.BooleanField(default=False)
-    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.code
@@ -141,4 +144,11 @@ class StorageProductDetails(models.Model):
     storage = models.ForeignKey(Storage, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=timezone.now)
+
+
+class DiscountStratery(models.Model):
+    class Meta:
+        db_table = 'quickstart_discount_stratery'
+
     created_at = models.DateTimeField(default=timezone.now)
