@@ -2,7 +2,7 @@ version: '3.8'
     
 services:
     db:
-        image: kartoza/postgis
+        image: postgres:12.3-alpine
         volumes:
             - postgres_data:/var/lib/postgresql/data/
         environment:
