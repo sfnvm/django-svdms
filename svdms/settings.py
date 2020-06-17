@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$i4&j)o53(u_s0b)$m*dz*zeoalvw4x2ravz0#^f+e87i7$w(3'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', default=1))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -37,8 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'channels',
-    'quickstart',
-    'geolocation',
+    'apps.quickstart',
+    'apps.auth',
+    'apps.user',
+    'apps.product',
+    'apps.order',
+    'apps.discount',
+    'apps.storage',
+    'apps.location',
+    'apps.chat',
 ]
 
 MIDDLEWARE = [
@@ -78,12 +85,11 @@ ASGI_APPLICATION = 'svdms.routing.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'django_quickstart',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
+        'USER': os.environ.get('SQL_USER', 'trungpt'),
+        'PASSWORD': os.environ.get('SQL_PASSWORD', '0812'),
+        'HOST': os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
 

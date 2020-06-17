@@ -23,36 +23,15 @@ class User(AbstractUser):
         choices=ROLE_CHOICES, null=True, blank=True)
 
 
-class SalesManager(models.Model):
+class CustomUser(models.Model):
     class Meta:
-        db_table = 'quickstart_sales_manager'
+        db_table = 'quickstart_custom_user'
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     code = models.CharField(max_length=32, unique=True, blank=True)
     idcard = models.CharField(max_length=128, unique=True, blank=True)
     avatar_url = models.CharField(max_length=1024, blank=True)
     phone_number = models.CharField(max_length=12, unique=True, blank=True)
-    gender = models.BooleanField(default=True)
-    address = models.CharField(max_length=256, blank=True)
-    date_of_birth = models.DateTimeField(
-        default=timezone.datetime(1996, 12, 28))
-    created_at = models.DateTimeField(default=timezone.now)
-    removed = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.code
-
-
-class SalesMan(models.Model):
-    class Meta:
-        db_table = 'quickstart_salesman'
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    code = models.CharField(max_length=32, unique=True, blank=True)
-    idcard = models.CharField(max_length=128, unique=True, blank=True)
-    avatar_url = models.CharField(max_length=1024, blank=True)
-    phone_number = models.CharField(max_length=12, unique=True, blank=True)
-    email = models.EmailField(max_length=128, unique=True, blank=True)
     gender = models.BooleanField(default=True)
     address = models.CharField(max_length=256, blank=True)
     date_of_birth = models.DateTimeField(
@@ -97,9 +76,9 @@ class Product(models.Model):
         return self.code
 
 
-class RequestOrder(models.Model):
+class Order(models.Model):
     class Meta:
-        db_table = 'quickstart_request_order'
+        db_table = 'quickstart_order'
 
     added_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True,
@@ -116,11 +95,11 @@ class RequestOrder(models.Model):
         return self.code
 
 
-class RequestOrderDetails(models.Model):
+class OrderProductDetails(models.Model):
     class Meta:
-        db_table = 'quickstart_request_order_details'
+        db_table = 'quickstart_order_product_details'
 
-    request_order = models.ForeignKey(RequestOrder, on_delete=models.CASCADE)
+    request_order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     amount = models.IntegerField(default=0)
     created_at = models.DateTimeField(default=timezone.now)

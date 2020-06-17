@@ -3,13 +3,13 @@ from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 
 from .channelsmiddleware import TokenAuthMiddleware
-from geolocation.consumers import PingConsumer
+# from apps.geolocation.consumers import PingConsumer
 
 
 application = ProtocolTypeRouter({
     'websocket': TokenAuthMiddleware(
         URLRouter([
-            url(r"ping/$", PingConsumer)
+            # url(r"ping/$", PingConsumer)
         ])
     )
 })

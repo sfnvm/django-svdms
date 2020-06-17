@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import SalesManager, SalesMan
+from .models import CustomUser
 from django.contrib.auth.models import User
 
 
-class SalesManagerSerializer(serializers.ModelSerializer):
+class CustomUserSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
     password = serializers.CharField(source='user.password', read_only=True)
@@ -12,7 +12,7 @@ class SalesManagerSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(source='user.last_name')
 
     class Meta:
-        model = SalesManager
+        model = CustomUser
         fields = (
             'id', 'username', 'password', 'email', 'first_name', 'last_name',
             'code', 'idcard', 'phone_number', 'address', 'date_of_birth', 'gender'
@@ -22,15 +22,15 @@ class SalesManagerSerializer(serializers.ModelSerializer):
         user_data = validated_data.pop('user')
         user = User.objects.create(**user_data)
 
-        salesManager = SalesManager.objects.create(user=user, **validated_data)
-        return salesManager
+        customUser = CustomUser.objects.create(user=user, **validated_data)
+        return customUser
 
     def update(self, instance, validated_data):
         user_data = validated_data.pop('user')
         # update User
         for attr, value in user_data.items():
             setattr(instance, attr, value)
-        # update SaleManager
+        # update CustomUser
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
