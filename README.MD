@@ -3,7 +3,6 @@
 * Clone this shit to your computer  
 * I assume that you already installed:
     - PostgreSQL v12
-    - PostgreSQL Extension: PostGIS
 
 ## ... Then execute commands below
 $ cd django-svdms  
@@ -21,10 +20,8 @@ $ python manage.py createsuperuser --email trungpt.dev@gmail.com --username trun
 # Tech-stack
 Django  
 - 'rest_framework',  
-- 'django.contrib.gis',  
 - 'channels'
 
 DRF  
 PostgreSQL  
-PostGIS  
 Redis  
