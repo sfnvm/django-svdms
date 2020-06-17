@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'channels',
     'apps.quickstart',
-    'apps.auth',
+    'apps.authen',
     'apps.user',
     'apps.product',
     'apps.order',
